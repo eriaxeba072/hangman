@@ -5,6 +5,8 @@ window.onload = function () {
   'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
   'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö'];
 
+  const lettersSound = [src="sound/a.wav", src="sound/b.wav", src="sound/c.wav", src="sound/d.wav", src="sound/e.wav", src="sound/f.wav", src="sound/g.wav", src="sound/h.wav", src="sound/i.wav", src="sound/j.wav", src="sound/k.wav", src="sound/l.wav", src="sound/m.wav", src="sound/n.wav", src="sound/o.wav", src="sound/p.wav", src="sound/q.wav", src="sound/r.wav", src="sound/s.wav", src="sound/t.wav", src="sound/u.wav", src="sound/v.wav", src="sound/w.wav", src="sound/x.wav", src="sound/y.wav", src="sound/z.wav", src="sound/å.wav", src="sound/ä.wav", src="sound/ö.wav" ]
+
   
   var categories;         // Array of topics
   var chosenCategory;     // Selected category
@@ -22,7 +24,9 @@ window.onload = function () {
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
 
-
+  var playAudio = function() {
+    console.log('det funkar');
+  }
 
   // create alphabet ul
   var buttons = function () {
@@ -32,14 +36,24 @@ window.onload = function () {
     for (var i = 0; i < alphabet.length; i++) {
       letters.id = 'alphabet';
       list = document.createElement('li');
-      list.id = 'letter';
+      list.id = alphabet[i];
       list.innerHTML = alphabet[i];
+      list.addEventListener('mouseover',playAudio);
       check();
       myButtons.appendChild(letters);
       letters.appendChild(list);
     }
   }
-    
+  
+  
+  //mouse over buttons sound
+
+var audio = function triggerMouseOver() {
+    myaudio = document.getElementById('audio');
+    lettersSound
+    audio.play();
+
+} 
   
   // Select category
   var selectCat = function () {
