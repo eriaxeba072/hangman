@@ -22,24 +22,19 @@ window.onload = function () {
   var counter ;           // Count correct guesses
   var space;              // Number of spaces in word '-'
 
-  var soundNumber; //test
-  var oneletterSound;
-
   // Get elements
   var showLives = document.getElementById("mylives");
   var showcategory = document.getElementById("category");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
 
-  var playAudio = function() {   
-    let audio = new Audio();  
-    console.log('funkar..');
-    console.log(soundNumber);//console.log(soundNumber);
-    audio.src = soundNumber//myButtons//lettersSound[1]
+  var playAudio = function() {
+    
+    var audio = new Audio();
+		audio.src = 'sound/b.wav'
     audio.play();
+    console.log('det funkar');
   }
-
-
 
   // create alphabet ul
   var buttons = function () {
@@ -51,15 +46,22 @@ window.onload = function () {
       list = document.createElement('li');
       list.id = alphabet[i];
       list.innerHTML = alphabet[i];
-      soundNumber = lettersSound[i];
-      list.addEventListener('mouseover', playAudio);
+      list.addEventListener('mouseover',playAudio);
       check();
       myButtons.appendChild(letters);
       letters.appendChild(list);
     }
   }
-
   
+  
+  //mouse over buttons sound
+
+var audio = function triggerMouseOver() {
+    myaudio = document.getElementById('audio');
+    lettersSound
+    audio.play();
+
+} 
   
   // Select category
   var selectCat = function () {
@@ -99,17 +101,10 @@ window.onload = function () {
     showLives.innerHTML = "Du har " + lives + " liv";
     if (lives < 1) {
       showLives.innerHTML = "Slut på gissningar";
-      let audio = new Audio();
-		audio.src = 'sound/f.wav'
-    audio.play();
     }
     for (var i = 0; i < guesses.length; i++) {
       if (counter + space === guesses.length) {
         showLives.innerHTML = "Du vann!";
-        let audio = new Audio();
-		audio.src = 'sound/c.wav'
-    audio.play();
-
       }
     }
   }
@@ -205,9 +200,6 @@ window.onload = function () {
         if (word[i] === guess) {
           guesses[i].innerHTML = guess;
           counter += 1;
-          let audio = new Audio();
-          audio.src = 'sound/d.wav'
-          audio.play();
         } 
       }
       var j = (word.indexOf(guess));
@@ -215,9 +207,6 @@ window.onload = function () {
         lives -= 1;
         comments();
         animate();
-        let audio = new Audio();
-		audio.src = 'sound/k.wav'
-    audio.play();
       } else {
         comments();
       }
@@ -264,9 +253,6 @@ window.onload = function () {
     var categoryIndex = categories.indexOf(chosenCategory);
     var hintIndex = chosenCategory.indexOf(word);
     showClue.innerHTML = "Tips: " +  hints [categoryIndex][hintIndex];
-    let audio = new Audio();
-		audio.src = 'sound/e.wav'
-    audio.play();
   };
 
    // Reset
@@ -276,14 +262,12 @@ window.onload = function () {
     letters.parentNode.removeChild(letters);
     showClue.innerHTML = "";
     context.clearRect(0, 0, 400, 400);
-    let audio = new Audio();
-		audio.src = 'sound/e.wav'
-    audio.play();
     play();
-  
   }
 }
 
 
-
+function newFunction(playAudio) {
+  playAudio.play('letterSound');
+}
 

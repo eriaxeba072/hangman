@@ -5,11 +5,11 @@ window.onload = function () {
   'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
   'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö'];
 
-  const lettersSound = [src="sound/a.wav", src="sound/b.wav", src="sound/c.wav", src="sound/d.wav", src="sound/e.wav", 
-  src="sound/f.wav", src="sound/g.wav", src="sound/h.wav", src="sound/i.wav", src="sound/j.wav", src="sound/k.wav", 
-  src="sound/l.wav", src="sound/m.wav", src="sound/n.wav", src="sound/o.wav", src="sound/p.wav", src="sound/q.wav", 
-  src="sound/r.wav", src="sound/s.wav", src="sound/t.wav", src="sound/u.wav", src="sound/v.wav", src="sound/w.wav", 
-  src="sound/x.wav", src="sound/y.wav", src="sound/z.wav", src="sound/å.wav", src="sound/ä.wav", src="sound/ö.wav" ]
+  const lettersSound = [src="sound/a.wav", src="sound/b.wav", src="sound/c.wav", src="sound/d.wav", src="sound/e.wav",
+    src="sound/f.wav", src="sound/g.wav", src="sound/h.wav", src="sound/i.wav", src="sound/j.wav", src="sound/k.wav",
+    src="sound/l.wav", src="sound/m.wav", src="sound/n.wav", src="sound/o.wav", src="sound/p.wav", src="sound/q.wav",
+    src="sound/r.wav", src="sound/s.wav", src="sound/t.wav", src="sound/u.wav", src="sound/v.wav", src="sound/w.wav",
+    src="sound/x.wav", src="sound/y.wav", src="sound/z.wav", src="sound/å.wav", src="sound/ä.wav", src="sound/ö.wav" ]
 
   
   var categories;         // Array of topics
@@ -22,22 +22,11 @@ window.onload = function () {
   var counter ;           // Count correct guesses
   var space;              // Number of spaces in word '-'
 
-  var soundNumber; //test
-  var oneletterSound;
-
   // Get elements
   var showLives = document.getElementById("mylives");
   var showcategory = document.getElementById("category");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
-
-  var playAudio = function() {   
-    let audio = new Audio();  
-    console.log('funkar..');
-    console.log(soundNumber);//console.log(soundNumber);
-    audio.src = soundNumber//myButtons//lettersSound[1]
-    audio.play();
-  }
 
 
 
@@ -49,17 +38,23 @@ window.onload = function () {
     for (var i = 0; i < alphabet.length; i++) {
       letters.id = 'alphabet';
       list = document.createElement('li');
-      list.id = alphabet[i];
+      list.id = 'letter';
       list.innerHTML = alphabet[i];
-      soundNumber = lettersSound[i];
-      list.addEventListener('mouseover', playAudio);
       check();
       myButtons.appendChild(letters);
       letters.appendChild(list);
     }
   }
-
   
+  
+  //mouse over buttons sound
+
+var audio = function triggerMouseOver() {
+    myaudio = document.getElementById('audio');
+    lettersSound
+    audio.play();
+
+} 
   
   // Select category
   var selectCat = function () {
@@ -99,17 +94,10 @@ window.onload = function () {
     showLives.innerHTML = "Du har " + lives + " liv";
     if (lives < 1) {
       showLives.innerHTML = "Slut på gissningar";
-      let audio = new Audio();
-		audio.src = 'sound/f.wav'
-    audio.play();
     }
     for (var i = 0; i < guesses.length; i++) {
       if (counter + space === guesses.length) {
         showLives.innerHTML = "Du vann!";
-        let audio = new Audio();
-		audio.src = 'sound/c.wav'
-    audio.play();
-
       }
     }
   }
@@ -205,9 +193,6 @@ window.onload = function () {
         if (word[i] === guess) {
           guesses[i].innerHTML = guess;
           counter += 1;
-          let audio = new Audio();
-          audio.src = 'sound/d.wav'
-          audio.play();
         } 
       }
       var j = (word.indexOf(guess));
@@ -215,9 +200,6 @@ window.onload = function () {
         lives -= 1;
         comments();
         animate();
-        let audio = new Audio();
-		audio.src = 'sound/k.wav'
-    audio.play();
       } else {
         comments();
       }
@@ -264,9 +246,6 @@ window.onload = function () {
     var categoryIndex = categories.indexOf(chosenCategory);
     var hintIndex = chosenCategory.indexOf(word);
     showClue.innerHTML = "Tips: " +  hints [categoryIndex][hintIndex];
-    let audio = new Audio();
-		audio.src = 'sound/e.wav'
-    audio.play();
   };
 
    // Reset
@@ -276,14 +255,8 @@ window.onload = function () {
     letters.parentNode.removeChild(letters);
     showClue.innerHTML = "";
     context.clearRect(0, 0, 400, 400);
-    let audio = new Audio();
-		audio.src = 'sound/e.wav'
-    audio.play();
     play();
-  
   }
 }
-
-
 
 
