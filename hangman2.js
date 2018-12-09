@@ -5,11 +5,11 @@ window.onload = function () {
   'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
   'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'Å', 'Ä', 'Ö'];
 
-  const lettersSound = [src="sound/a.wav", src="sound/b.wav", src="sound/c.wav", src="sound/d.wav", src="sound/e.wav", 
-  src="sound/f.wav", src="sound/g.wav", src="sound/h.wav", src="sound/i.wav", src="sound/j.wav", src="sound/k.wav", 
-  src="sound/l.wav", src="sound/m.wav", src="sound/n.wav", src="sound/o.wav", src="sound/p.wav", src="sound/q.wav", 
-  src="sound/r.wav", src="sound/s.wav", src="sound/t.wav", src="sound/u.wav", src="sound/v.wav", src="sound/w.wav", 
-  src="sound/x.wav", src="sound/y.wav", src="sound/z.wav", src="sound/å.wav", src="sound/ä.wav", src="sound/ö.wav" ]
+  const lettersSound = ["sound/A.wav", "sound/B.wav", "sound/C.wav", "sound/D.wav", "sound/E.wav", 
+  "sound/F.wav", "sound/G.wav", "sound/H.wav", "sound/I.wav", "sound/J.wav", "sound/K.wav", 
+  "sound/L.wav", "sound/M.wav", "sound/N.wav", "sound/O.wav", "sound/P.wav", "sound/Q.wav", 
+  "sound/R.wav", "sound/S.wav", "sound/T.wav", "sound/U.wav", "sound/V.wav", "sound/W.wav", 
+  "sound/X.wav", "sound/Y.wav", "sound/Z.wav", "sound/Å.wav", "sound/Ä.wav", "sound/Ö.wav"]
 
   
   var categories;         // Array of topics
@@ -30,37 +30,39 @@ window.onload = function () {
   var showcategory = document.getElementById("category");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
+  
+  console.log(lettersSound.length);
+  console.log(alphabet.length);
 
   var playAudio = function() {   
     let audio = new Audio();  
     console.log('funkar..');
-    console.log(soundNumber);//console.log(soundNumber);
-    audio.src = soundNumber//myButtons//lettersSound[1]
+    //console.log(this); 
+    //console.log(buttons.arguments);
+    console.log(soundNumber);
+    //audio.src = `${lettersSound[1]}`;
+    audio.src = `${letters}`;
+    audio.src = lettersSound[1];
     audio.play();
   }
 
-
-
-  // create alphabet ul
-  var buttons = function () {
-    myButtons = document.getElementById('buttons');
-    letters = document.createElement('ul');
-
-    for (var i = 0; i < alphabet.length; i++) {
-      letters.id = 'alphabet';
+var buttons = function (letterz, index) {
+  //console.log(letters,index);
+  myButtons = document.getElementById('buttons');
+  letters = document.createElement('ul');
+    letters.id = 'alphabet';
       list = document.createElement('li');
-      list.id = alphabet[i];
-      list.innerHTML = alphabet[i];
-      soundNumber = lettersSound[i];
+      list.innerHTML = letterz;
       list.addEventListener('mouseover', playAudio);
-      check();
+      var soundNumber = index;
+      //check();
       myButtons.appendChild(letters);
-      letters.appendChild(list);
-    }
-  }
+      letters.appendChild(list);  
+}
+alphabet.forEach(buttons);
+  
 
-  
-  
+
   // Select category
   var selectCat = function () {
     if (chosenCategory === categories[0]) {
