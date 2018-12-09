@@ -37,29 +37,33 @@ window.onload = function () {
   var playAudio = function() {   
     let audio = new Audio();  
     console.log('funkar..');
+    console.log(soundNumber);
     //console.log(this); 
     //console.log(buttons.arguments);
-    console.log(soundNumber);
+    //console.log(indexx);
     //audio.src = `${lettersSound[1]}`;
-    audio.src = `${letters}`;
+    //audio.src = `${letterz}`;
     audio.src = lettersSound[1];
     audio.play();
   }
 
-var buttons = function (letterz, index) {
-  //console.log(letters,index);
+//var buttons = function (letterz, index) {
+  function buttons(letterz, indexx){
+  //console.log(buttons);
   myButtons = document.getElementById('buttons');
   letters = document.createElement('ul');
     letters.id = 'alphabet';
       list = document.createElement('li');
       list.innerHTML = letterz;
+      //return indexx;
       list.addEventListener('mouseover', playAudio);
-      var soundNumber = index;
+      soundNumber = buttons.indexx;
       //check();
       myButtons.appendChild(letters);
       letters.appendChild(list);  
 }
 alphabet.forEach(buttons);
+
   
 
 
