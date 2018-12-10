@@ -22,45 +22,46 @@ window.onload = function () {
   var counter ;           // Count correct guesses
   var space;              // Number of spaces in word '-'
 
-  var soundNumber; //test
-  var oneletterSound;
 
   // Get elements
   var showLives = document.getElementById("mylives");
   var showcategory = document.getElementById("category");
   var getHint = document.getElementById("hint");
   var showClue = document.getElementById("clue");
-  
-  console.log(lettersSound.length);
-  console.log(alphabet.length);
 
-  var playAudio = function() {   
-    let audio = new Audio();  
-    console.log('funkar..');
-    console.log(soundNumber);
-    //console.log(this); 
-    //console.log(buttons.arguments);
-    //console.log(indexx);
-    //audio.src = `${lettersSound[1]}`;
-    //audio.src = `${letterz}`;
-    audio.src = lettersSound[1];
-    audio.play();
-  }
 
 //var buttons = function (letterz, index) {
   function buttons(letterz, indexx){
+
+var audio = new Audio();
+
+    var playAudio = function() {     
+      console.log('spelar ljud..');
+      audio.src = lettersSound[indexx];
+      audio.play();
+    }
+
+    var stopAudio = function() {
+      console.log('stoppar ljud..');
+      audio.pause();
+      audio.currentTime = 0;
+    }
+    
+
   //console.log(buttons);
   myButtons = document.getElementById('buttons');
   letters = document.createElement('ul');
     letters.id = 'alphabet';
       list = document.createElement('li');
       list.innerHTML = letterz;
-      //return indexx;
       list.addEventListener('mouseover', playAudio);
-      soundNumber = buttons.indexx;
+      list.addEventListener('mouseout', stopAudio);
       //check();
       myButtons.appendChild(letters);
-      letters.appendChild(list);  
+      letters.appendChild(list); 
+      
+      
+
 }
 alphabet.forEach(buttons);
 
