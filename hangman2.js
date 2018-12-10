@@ -30,14 +30,43 @@ window.onload = function () {
   var showClue = document.getElementById("clue");
 
 
-//var buttons = function (letterz, index) {
-  function buttons(letterz, indexx){
+// OnClick Function
+check = function () {
+  list.onclick = function () {
+    var guess = (this.innerHTML);
+    this.setAttribute("class", "active");
+    this.onclick = null;
+    for (var i = 0; i < word.length; i++) {
+      if (word[i] === guess) {
+        guesses[i].innerHTML = guess;
+        counter += 1;
+        let audio = new Audio();
+        audio.src = 'sound/d.wav'
+        audio.play();
+      } 
+    }
+    var j = (word.indexOf(guess));
+    if (j === -1) {
+      lives -= 1;
+      comments();
+      animate();
+      let audio = new Audio();
+  audio.src = 'sound/k.wav'
+  audio.play();
+    } else {
+      comments();
+    }
+  }
+}
+
+//var buttons = function (letters, index) {
+  function buttons(letterz, index){
 
 var audio = new Audio();
 
     var playAudio = function() {     
       console.log('spelar ljud..');
-      audio.src = lettersSound[indexx];
+      audio.src = lettersSound[index];
       audio.play();
     }
 
@@ -46,9 +75,7 @@ var audio = new Audio();
       audio.pause();
       audio.currentTime = 0;
     }
-    
 
-  //console.log(buttons);
   myButtons = document.getElementById('buttons');
   letters = document.createElement('ul');
     letters.id = 'alphabet';
@@ -56,11 +83,23 @@ var audio = new Audio();
       list.innerHTML = letterz;
       list.addEventListener('mouseover', playAudio);
       list.addEventListener('mouseout', stopAudio);
-      //check();
+      check();
       myButtons.appendChild(letters);
       letters.appendChild(list); 
       
-      
+      // Reset
+
+  document.getElementById('reset').onclick = function() {
+    correct.parentNode.removeChild(correct);
+    letters.parentNode.removeChild(letters);
+    showClue.innerHTML = "";
+    context.clearRect(0, 0, 400, 400);
+    let audio = new Audio();
+		audio.src = 'sound/e.wav'
+    audio.play();
+    play();
+  
+  }
 
 }
 alphabet.forEach(buttons);
@@ -202,34 +241,7 @@ alphabet.forEach(buttons);
   drawArray = [rightLeg, leftLeg, rightArm, leftArm,  torso,  head, frame4, frame3, frame2, frame1]; 
 
 
-  // OnClick Function
-   check = function () {
-    list.onclick = function () {
-      var guess = (this.innerHTML);
-      this.setAttribute("class", "active");
-      this.onclick = null;
-      for (var i = 0; i < word.length; i++) {
-        if (word[i] === guess) {
-          guesses[i].innerHTML = guess;
-          counter += 1;
-          let audio = new Audio();
-          audio.src = 'sound/d.wav'
-          audio.play();
-        } 
-      }
-      var j = (word.indexOf(guess));
-      if (j === -1) {
-        lives -= 1;
-        comments();
-        animate();
-        let audio = new Audio();
-		audio.src = 'sound/k.wav'
-    audio.play();
-      } else {
-        comments();
-      }
-    }
-  }
+  
   
     
   // Play
@@ -276,19 +288,7 @@ alphabet.forEach(buttons);
     audio.play();
   };
 
-   // Reset
-
-  document.getElementById('reset').onclick = function() {
-    correct.parentNode.removeChild(correct);
-    letters.parentNode.removeChild(letters);
-    showClue.innerHTML = "";
-    context.clearRect(0, 0, 400, 400);
-    let audio = new Audio();
-		audio.src = 'sound/e.wav'
-    audio.play();
-    play();
   
-  }
 }
 
 

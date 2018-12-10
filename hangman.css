@@ -49,6 +49,7 @@ body {
     clear: both;
   }
   #alphabet li {
+    position: relative;
     float: left;
     margin: 0 10px 10px 0;
     list-style: none;
